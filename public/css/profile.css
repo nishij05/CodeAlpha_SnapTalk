@@ -1,0 +1,225 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.profile-header {
+  background-color: #fff;
+  padding: 16px 24px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header .logo {
+  height: 40px;
+}
+
+.home-btn {
+  padding: 8px 16px;
+  background-color: #2196f3;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.home-btn:hover {
+  background-color: #1976d2;
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* Profile Card */
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Avatar Upload */
+.avatar-wrapper {
+  position: relative;
+  width: 150px;
+  margin: 0 auto 15px;
+}
+
+.avatar-wrapper img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #2196f3;
+}
+
+.upload-btn {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: #f1f1f1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #444;
+}
+
+#uploadInput {
+  display: none;
+}
+
+/* Username */
+#username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.stats div {
+  font-size: 16px;
+  color: #555;
+}
+
+.stats strong {
+  display: block;
+  font-size: 20px;
+  color: #000;
+}
+
+/* Buttons */
+.edit-btn,
+#logoutBtn {
+  padding: 10px 20px;
+  margin: 10px 8px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #43a047;
+}
+
+#logoutBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+#logoutBtn:hover {
+  background-color: #d32f2f;
+}
+
+/* Post Gallery */
+.post-gallery {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Each Post */
+.post-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.post-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile-post-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Caption */
+.post-box p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Buttons inside Post */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #43a047;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}

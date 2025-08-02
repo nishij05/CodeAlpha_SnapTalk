@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Profile - SnapTalk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- ✅ Header should be OUTSIDE the container -->
+    <div class="profile-header">
+      <img src="logo.png" alt="logo-image" class="logo" />
+      <a href="home.html" class="home-btn" id="homeBtn">Back to Home</a>
+    </div>
+
+    <!-- ✅ Main content container -->
+    <div class="container">
+      <div class="card">
+        <!-- Avatar & Upload -->
+        <div class="avatar-wrapper">
+          <img id="profileImage" src="" alt="Avatar" />
+          <label for="uploadInput" class="upload-btn">📷 Upload</label>
+          <input type="file" id="uploadInput" accept="image/*" />
+        </div>
+
+        <!-- User Info -->
+        <h2 id="username">Username</h2>
+        <div class="stats">
+          <div><strong id="postCount">0</strong><br />Posts</div>
+          <div><strong id="followersCount">0</strong><br />Followers</div>
+          <div><strong id="followingCount">0</strong><br />Following</div>
+        </div>
+
+        <a href="editProfile.html"
+          ><button class="edit-btn">✏️ Edit Profile</button></a
+        >
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+    <div class="post-gallery"></div>
+
+    <script src="js/profile.js"></script>
+  </body>
+</html>

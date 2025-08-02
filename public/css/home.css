@@ -1,0 +1,238 @@
+:root {
+  --primary: #5a78ff;
+  --gray: #ddd;
+  --text: #333;
+  --bg: #f4f4f4;
+  --white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.main {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Navbar */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.logo {
+  height: 40px;
+}
+
+.search {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+}
+
+.new-post,
+.signup-btn,
+.profile-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.profile-menu {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+  padding: 0.5rem;
+  display: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown p {
+  margin-bottom: 0.5rem;
+}
+
+.dropdown button {
+  width: 100%;
+  background-color: crimson;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Feed/Post styles */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post {
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+
+.username {
+  font-weight: bold;
+  flex: 1;
+}
+
+#usernameDisplay {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.caption {
+  margin-bottom: 0.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+}
+
+.post-action {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.like-wrapper,
+.comment-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.like-icon {
+  font-size: 1.2rem;
+}
+
+.like-icon.liked {
+  color: red;
+}
+
+.comment-box {
+  display: none;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.comment-input {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+}
+
+.comment-box button {
+  padding: 0.4rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comments {
+  list-style: none;
+  padding-left: 0;
+}
+
+.comments li {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.follow-btn {
+  background-color: #eee;
+  border: 1px solid var(--gray);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.profile-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.profile-btn img.nav-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .new-post,
+  .signup-btn,
+  .profile-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Profile - SnapTalk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/editProfile.css" />
+  </head>
+  <body>
+    <div class="profile-header">
+      <img src="logo.png" alt="logo" class="logo" />
+      <a href="profile.html" class="home-btn">← Back to Profile</a>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <h2>Edit Your Profile</h2>
+        <form id="editProfileForm">
+          <!-- Profile Picture -->
+          <div class="avatar-wrapper">
+            <img id="previewImage" src="" alt="Avatar" />
+            <label for="newProfileImage" class="upload-btn"
+              >📷 Change Photo</label
+            >
+            <input type="file" id="newProfileImage" accept="image/*" />
+          </div>
+
+          <!-- Editable Fields -->
+          <label for="newName">Name:</label>
+          <input type="text" id="newName" required />
+
+          <label for="newEmail">Email:</label>
+          <input type="email" id="newEmail" required />
+
+          <label for="newPassword">New Password:</label>
+          <input
+            type="password"
+            id="newPassword"
+            placeholder="Leave blank to keep current"
+          />
+
+          <label for="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Leave blank to keep current"
+          />
+
+          <button type="submit" class="edit-btn">💾 Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/editProfile.js"></script>
+  </body>
+</html>
