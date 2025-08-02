@@ -11,7 +11,9 @@ app.use(cors());
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
+// Serve frontend (optional, only needed if serving static HTML from backend)
+// If deploying frontend separately on Vercel, you may omit this
+app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 // ===== Route Imports =====
 const registerRoute = require("./routes/user/signup");
@@ -22,8 +24,8 @@ const userRoute = require("./routes/api/users"); // contains /follow, /unfollow,
 // ===== Use Routes =====
 app.use("/api/users", registerRoute); // /register
 app.use("/api/users", loginRoute); // /login, /protected
-app.use("/api/users", userRoute); // /:id/follow, /:id/unfollow, /protected
-app.use("/api/posts", postRoute); // Post related endpoints
+app.use("/api/users", userRoute);   // /:id/follow, /:id/unfollow, /protected
+app.use("/api/posts", postRoute);   // Post related endpoints
 
 // ===== Connect MongoDB =====
 mongoose
@@ -33,9 +35,10 @@ mongoose
   })
   .then(() => {
     console.log("✅ MongoDB connected");
-    app.listen(5000, () =>
-      console.log("🚀 Server running on http://localhost:5000")
-    );
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
   })
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err);
