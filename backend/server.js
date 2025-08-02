@@ -16,6 +16,10 @@ app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 // ===== Route Imports =====
+app.get("/", (req, res) => {
+  res.send("🚀 SnapTalk API is live!");
+});
+
 const registerRoute = require("./routes/user/signup");
 const loginRoute = require("./routes/user/login");
 const postRoute = require("./routes/user/post");
@@ -24,15 +28,12 @@ const userRoute = require("./routes/api/users"); // contains /follow, /unfollow,
 // ===== Use Routes =====
 app.use("/api/users", registerRoute); // /register
 app.use("/api/users", loginRoute); // /login, /protected
-app.use("/api/users", userRoute);   // /:id/follow, /:id/unfollow, /protected
-app.use("/api/posts", postRoute);   // Post related endpoints
+app.use("/api/users", userRoute); // /:id/follow, /:id/unfollow, /protected
+app.use("/api/posts", postRoute); // Post related endpoints
 
 // ===== Connect MongoDB =====
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("✅ MongoDB connected");
     const PORT = process.env.PORT || 5000;
