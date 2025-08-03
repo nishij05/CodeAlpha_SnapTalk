@@ -31,7 +31,7 @@ window.onload = async function () {
 
   // Fetch and display posts
   try {
-    const res = await fetch("http://localhost:5000/api/posts"); // Adjust the URL if needed
+    const res = await fetch("https://codealpha-snaptalk-1.onrender.com/api/posts"); // Adjust the URL if needed
     const posts = await res.json();
     displayPosts(posts);
   } catch (err) {
@@ -122,7 +122,7 @@ function logout() {
 function likePost(icon, postId) {
   const isLiked = icon.classList.contains("liked");
   const token = localStorage.getItem("token");
-  const url = `http://localhost:5000/api/posts/${postId}/${
+  const url = `https://codealpha-snaptalk-1.onrender.com/api/posts/${postId}/${
     isLiked ? "unlike" : "like"
   }`;
 
@@ -148,7 +148,7 @@ function addComment(btn, postId) {
 
   axios
     .post(
-      `http://localhost:5000/api/posts/${postId}/comment`,
+      `https://codealpha-snaptalk-1.onrender.com/api/posts/${postId}/comment`,
       { text: comment },
       {
         headers: {
@@ -175,7 +175,7 @@ function toggleFollow(btn, targetUserId) {
   }
 
   const isFollowing = btn.innerText === "Unfollow";
-  const url = `http://localhost:5000/api/users/${targetUserId}/${
+  const url = `https://codealpha-snaptalk-1.onrender.com/api/users/${targetUserId}/${
     isFollowing ? "unfollow" : "follow"
   }`;
 
@@ -191,7 +191,7 @@ function toggleFollow(btn, targetUserId) {
       btn.innerText = isFollowing ? "Follow" : "Unfollow";
       alert(`${isFollowing ? "Unfollowed" : "Followed"} successfully`);
 
-      const res = await axios.get("http://localhost:5000/api/users/protected", {
+      const res = await axios.get("https://codealpha-snaptalk-1.onrender.com/api/users/protected", {
         headers: { Authorization: `Bearer ${token}` }, // ✅ fixed header
       });
 

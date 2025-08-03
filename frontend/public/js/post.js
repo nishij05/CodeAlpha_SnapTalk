@@ -18,7 +18,7 @@ form.addEventListener("submit", async (e) => {
   formData.append("image", imageFile);
 
   try {
-    await axios.post("http://localhost:5000/api/posts", formData, {
+    await axios.post("https://codealpha-snaptalk-1.onrender.com/api/posts", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

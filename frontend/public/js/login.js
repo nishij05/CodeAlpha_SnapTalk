@@ -8,7 +8,7 @@ form.addEventListener("submit", async (e) => {
   const password = form.password.value;
 
   try {
-    const res = await axios.post("http://localhost:5000/api/users/login", {
+    const res = await axios.post("https://codealpha-snaptalk-1.onrender.com/api/users/login", {
       email,
       password,
     });
