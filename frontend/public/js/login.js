@@ -8,23 +8,21 @@ form.addEventListener("submit", async (e) => {
   const password = form.password.value;
 
   try {
-    const res = await axios.post("https://codealpha-snaptalk-1.onrender.com/api/users/login", {
+    const res = await axios.post("http://localhost:5000/api/users/login", {
       email,
       password,
     });
 
     const { user, token } = res.data;
 
-    // ✅ Save user info and token with Bearer prefix
+    // Save token and user (user has no image data in token)
     localStorage.setItem("token", token);
     localStorage.setItem("snapUser", JSON.stringify(user));
 
-    // console.log("Token stored:", `Bearer ${token}`);
-
-    alert("Login successful ✅");
-    window.location.href = "home.html"; // redirect to home after login
+    alert("Login successful");
+    window.location.href = "home.html";
   } catch (err) {
-    if (err.response && err.response.data) {
+    if (err.response?.data) {
       errorDiv.textContent = Object.values(err.response.data).join(", ");
     } else {
       errorDiv.textContent = "Something went wrong";

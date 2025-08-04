@@ -6,6 +6,9 @@ const profileImage = document.getElementById("profileImage");
 const uploadInput = document.getElementById("uploadInput");
 const token = localStorage.getItem("token");
 
+// console.log("token:", token);
+// console.log("Token length:", token.length);
+
 if (!token) {
   alert("You are not logged in. Redirecting...");
   window.location.href = "login.html";
@@ -14,12 +17,9 @@ if (!token) {
 // Fetch user info and render profile
 async function fetchAndRenderProfile() {
   try {
-    const res = await axios.get(
-      "https://codealpha-snaptalk-1.onrender.com/api/users/protected",
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const res = await axios.get("http://localhost:5000/api/users/protected", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     const user = res.data.user;
     console.log("✅ Protected user:", user);
@@ -35,7 +35,7 @@ async function fetchAndRenderProfile() {
     const userId = user._id || user.id;
 
     const postRes = await axios.get(
-      `https://codealpha-snaptalk-1.onrender.com/api/posts/user/${userId}`,
+      `http://localhost:5000/api/posts/user/${userId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -51,11 +51,13 @@ async function fetchAndRenderProfile() {
       const div = document.createElement("div");
       div.className = "post-box";
       div.innerHTML = `
-        <img src="data:image/jpeg;base64,${post.image}" alt="${post.caption}" class="profile-post-img" />
-        <p>${post.caption}</p>
-        <button onclick="editPost('${post._id}', \`${post.caption}\`)">✏️ Edit</button>
-        <button onclick="deletePost('${post._id}')">🗑️ Delete</button>
-      `;
+  <img src="data:image/jpeg;base64,${post.image}" alt="${post.caption}" class="profile-post-img" />
+  <p class="caption-text">${post.caption}</p>
+  <div class="post-actions">
+    <button class="edit-post-btn" onclick="editPost('${post._id}', \`${post.caption}\`)">✏️ Edit</button>
+    <button class="delete-post-btn" onclick="deletePost('${post._id}')">🗑️ Delete</button>
+  </div>
+`;
       postSection.appendChild(div);
     });
 
@@ -82,45 +84,41 @@ window.addEventListener("focus", () => {
 
 uploadInput.addEventListener("change", function () {
   const file = this.files[0];
-  if (!file) return;
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64Image = e.target.result;
 
-  if (file.size > 2 * 1024 * 1024) {
-    alert("Please upload an image smaller than 2MB.");
-    return;
+      profileImage.src = base64Image; // Preview
+
+      try {
+        // Save image to DB
+        await axios.put(
+          "http://localhost:5000/api/users/profile-image",
+          { image: base64Image },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        // Update local storage snapshot
+        const updatedUser = await axios.get(
+          "http://localhost:5000/api/users/protected",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        localStorage.setItem("snapUser", JSON.stringify(updatedUser.data.user));
+      } catch (error) {
+        console.error("❌ Failed to upload profile image:", error);
+        alert("Upload failed");
+      }
+    };
+    reader.readAsDataURL(file);
   }
-  const reader = new FileReader();
-  reader.onload = async (e) => {
-    const base64Image = e.target.result;
-
-    profileImage.src = e.target.result; // Preview
-
-    try {
-      // Save image to DB
-      await axios.put(
-        "https://codealpha-snaptalk-1.onrender.com/api/users/profile-image",
-        { image: base64Image },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // Update local storage snapshot
-      const updatedUser = await axios.get(
-        "https://codealpha-snaptalk-1.onrender.com/api/users/protected",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      localStorage.setItem("snapUser", JSON.stringify(updatedUser.data.user));
-    } catch (error) {
-      console.error("❌ Failed to upload profile image:", error);
-      alert("Upload failed");
-    }
-  };
-  reader.readAsDataURL(file);
 });
 
 // Logout logic
@@ -135,7 +133,7 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 function deletePost(postId) {
   if (confirm("Are you sure you want to delete this post?")) {
     axios
-      .delete(`https://codealpha-snaptalk-1.onrender.com/api/posts/${postId}`, {
+      .delete(`http://localhost:5000/api/posts/${postId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
@@ -155,7 +153,7 @@ function editPost(postId, oldCaption) {
   if (newCaption && newCaption !== oldCaption) {
     axios
       .put(
-        `https://codealpha-snaptalk-1.onrender.com/api/posts/${postId}`,
+        `http://localhost:5000/api/posts/${postId}`,
         { caption: newCaption },
         {
           headers: {

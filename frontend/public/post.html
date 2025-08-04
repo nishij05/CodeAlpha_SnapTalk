@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Post - SnapTalk</title>
-    <link rel="stylesheet" href="../css/post.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  </head>
-  <body>
-    <div class="profile-header">
-      <img src="logo.png" alt="logo" class="logo" />
-      <a href="profile.html" class="home-btn">← Back to Profile</a>
-    </div>
-    <div class="post-container">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Post - SnapTalk</title>
+  <link rel="stylesheet" href="css/post.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <header class="header">
+    <a href="profile.html" class="back-btn">← Back to Profile</a>
+    <img src="logo.png" alt="SnapTalk Logo" class="logo" />
+  </header>
+
+  <main class="post-wrapper">
+    <div class="post-card">
       <h2>Create a New Post</h2>
       <form id="postForm">
-        <input
-          type="text"
-          id="caption"
-          placeholder="Write a caption..."
-          required
-        />
+        <label for="caption">📄 Caption</label>
+        <input type="text" id="caption" placeholder="Write something..." required />
+
+        <label for="image">📷 Upload Image</label>
         <input type="file" id="image" accept="image/*" required />
-        <button type="submit">Publish</button>
+
+        <img id="previewImage" class="preview-img" alt="Preview" style="display: none;" />
+
+        <button type="submit">🚀 Publish</button>
         <p class="error" id="errorMsg"></p>
       </form>
     </div>
-    <script src="../js/post.js"></script>
-  </body>
+  </main>
+
+  <script src="js/post.js"></script>
+</body>
 </html>

@@ -18,7 +18,7 @@ form.addEventListener("submit", async (e) => {
   formData.append("image", imageFile);
 
   try {
-    await axios.post("https://codealpha-snaptalk-1.onrender.com/api/posts", formData, {
+    await axios.post("http://localhost:5000/api/posts", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -31,5 +31,22 @@ form.addEventListener("submit", async (e) => {
     console.error(" Post error:", err);
     errorDiv.textContent =
       err.response?.data?.error || "Failed to create post.";
+  }
+});
+
+document.getElementById("image").addEventListener("change", function () {
+  const file = this.files[0];
+  const preview = document.getElementById("previewImage");
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+      preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+    preview.style.display = "none";
   }
 });

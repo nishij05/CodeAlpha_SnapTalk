@@ -31,8 +31,14 @@ router.post("/register", async (req, res) => {
     const savedUser = await newUser.save();
 
     // Sign token and return it
-    const payload = { id: savedUser._id, name: savedUser.name };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1h" });
+    const payload = {
+      id: savedUser._id,
+      name: savedUser.name,
+      email: savedUser.email,
+    };
+    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
 
     res.json({ user: savedUser, token });
   } catch (err) {
